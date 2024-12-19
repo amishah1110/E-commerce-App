@@ -1,7 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import loginIcon from '../assets-mern/signin.gif'
+import { FaEye } from "react-icons/fa";
+import { FaEyeSlash } from "react-icons/fa";
+import {Link} from 'react-router-dom';
 
 const Login = () => {
+    const[showPassword, setShowPassword] = useState(false); 
+
     return (
         <section id='login'>
             <div className="mx-auto container p-4">
@@ -11,15 +16,29 @@ const Login = () => {
                     </div>
 
                     <form>
-                        <div>
+                        <div className="grid">
                             <label>Email: </label>
-                            <input type='email' placeholder="Enter email address" />
+                            <div className="bg-slate-200 p-2">
+                                <input type='email' placeholder="Enter email address" className="w-full h-full bg-transparent" />
+                            </div>
+                            
                         </div>
                         <div>
                             <label>Password: </label>
-                            <input type='password' placeholder="Enter password" />
+                            <div className="bg-slate-200 p-2 flex">
+                                <input type={showPassword ? "text" : "password"} placeholder="Enter password" className="w-full h-full bg-transparent" />
+                                <div className='cursor-pointer text-xl' onClick={()=>setShowPassword((prev)=>!prev)}>
+                                    <span>
+                                        {
+                                            showPassword ? (<FaEyeSlash />) : (<FaEye />)
+                                        }                                        
+                                    </span>
+                                </div>
+                            </div>
+                            <Link to={"/forgot-password"} className='block w-fit ml-auto hover:underline hover:text-red-600'>Forgot Password</Link> 
+                
                         </div>
-                        <button className="bg-green-800 text-white p-2 rounded-full">Login</button>
+                        <button className="bg-green-800 text-white px-6 py-2 rounded-full w-full max-w-[150px] hover:scale-110 transition-all mx-auto block mt-6">Login</button>
                     </form>
 
                 </div>
