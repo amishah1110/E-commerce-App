@@ -3,14 +3,17 @@ import Logo from './Logo'
 import { FaSearch } from "react-icons/fa"; //search
 import { FaUserAlt } from "react-icons/fa"; //user icon
 import { FaShoppingCart } from "react-icons/fa"; //shopping cart
+import { Link } from 'react-router-dom';
 
 const Header = () => {
   return (
-    <header className='h-16 shadow-md'>
+    <header className='h-16 shadow-md bg-white'>
       <div className='h-full container mx-auto flex items-center justify-between'>
         
-        <div className=''>
-          <Logo w={110} h={50}/>
+        <div className='cursor-pointer'>
+          <Link to={""}>
+            <Logo w={110} h={50}/>
+          </Link>
         </div>
 
         <div className='hidden lg:flex items-center w-full justify-between max-w-sm border rounded-full focus-within:shadow pl-2'>
@@ -33,7 +36,7 @@ const Header = () => {
           </div>
 
           <div>
-            <button className='px-2 py-1 bg-red-600 hover:bg-red-800 rounded-full text-white'>Login</button>
+            <Link to={"/login"} className='px-2 py-1 bg-red-600 hover:bg-red-800 rounded-full text-white'>Login</Link>
           </div>
         </div>
 
