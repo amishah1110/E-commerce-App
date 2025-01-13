@@ -5,7 +5,22 @@ import { FaEyeSlash } from "react-icons/fa";
 import {Link} from 'react-router-dom';
 
 const Login = () => {
-    const[showPassword, setShowPassword] = useState(false); 
+    const[showPassword, setShowPassword] = useState(false);
+    const [data, setData] = useState({
+        email: "",
+        password: ""
+    }) 
+
+    const handleOnChange = (event) => {
+        const{name, value} = event.target;
+        setData((prev)=>{
+            return {...prev, [name]: value}
+        })
+    }
+
+    const handleSubmit=(event) => {
+        event.preventDefault();
+    }
 
     return (
         <section id='login'>
@@ -15,18 +30,30 @@ const Login = () => {
                         <img src={loginIcon} alt="login-icon"></img>
                     </div>
 
-                    <form className='pt-6 '>
+                    <form className='pt-6' onSubmit={handleSubmit}>
                         <div className="grid">
                             <label>Email: </label>
                             <div className="bg-slate-200 p-2">
-                                <input type='email' placeholder="Enter email address" className="w-full h-full bg-transparent" />
+                                <input 
+                                type='email' 
+                                placeholder="Enter email address" 
+                                onChange={handleOnChange}
+                                name='email'
+                                value={data.email}
+                                className="w-full h-full bg-transparent" />
                             </div>
                             
                         </div>
                         <div>
                             <label>Password: </label>
                             <div className="bg-slate-200 p-2 flex">
-                                <input type={showPassword ? "text" : "password"} placeholder="Enter password" className="w-full h-full bg-transparent" />
+                                <input 
+                                type={showPassword ? "text" : "password"} 
+                                placeholder="Enter password" 
+                                name="password"
+                                value={data.password}
+                                onChange={handleOnChange}
+                                className="w-full h-full bg-transparent" />
                                 <div className='cursor-pointer text-xl' onClick={()=>setShowPassword((prev)=>!prev)}>
                                     <span>
                                         {
@@ -38,7 +65,7 @@ const Login = () => {
                             <Link to={"/forgot-password"} className='block w-fit ml-auto hover:underline hover:text-red-600'>Forgot Password</Link> 
                 
                         </div>
-                        <button className="bg-green-800 text-white px-6 py-2 rounded-full w-full max-w-[150px] hover:scale-110 hover:bg-green-900 transition-all mx-auto block mt-6">Login</button>
+                        <button className="bg-green-800 text-white px-6 py-2 rounded-full w-full max-w-[150px] hover:scale-110 hover:bg-green-900 transition-all mx-auto block mt-6 justify-center">Login</button>
                     </form>
                     <p className="my-5">Don't have an account? <Link to={"/sign-up"} className="hover:underline hover:text-red-700">Click here to Sign Up</Link></p>
 
